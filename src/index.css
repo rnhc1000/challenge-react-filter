@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@200;300;500&family=Ysabeau:ital,wght@1,200;1,300;1,500&display=swap');
+
+:root {
+
+  --color-bg-header: #55BC04;
+  --dsc-color-bg-primary: #6F6F6F;
+  --dsc-color-bg-card: #FFFFFF;
+  --dsc-color-bg-filter: #C2C2C2
+
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+
+  font-family: "Open Sans", sans-serif;
+  background-color: var(--dsc-color-bg-primary);
+
+}
+
+.border-filter {
+
+}
+
