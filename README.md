@@ -24,8 +24,12 @@ The design is structured as shown:
           - styles.css
         - Home
         - ListingBody
-
-   - routes
+          - FilterCard
+          - ProductCard
+    - dto
+    - services
+    - utils
+    - routes
         - GoHome
    - App.tsx
    - index.css
@@ -46,40 +50,30 @@ The design is structured as shown:
 
  ## _What I practiced_
 ```jsx
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Home from "./routes/Home";
-import NotFound from "./routes/NotFound";
-import Products from "././routes/Products";
-import Electronics from "./routes/Products/Electronics";
-import Books from "./routes/Products/Books";
-import AboutUs from "./routes/AboutUs";
-import BodyHome from "./routes/BodyHome";
-import Computers from "./routes/Products/Computers";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import GoHome from './routes/GoHome';
+import { useState } from "react";
+import { ContextProductCount } from "./utils/products-context";
 
 function App() {
 
+  const [contextProductCount, setContextProductCount] = useState<number>(0);
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />}>
-            <Route index element={<Navigate to="/home" />} />
-            <Route path="home" element={<BodyHome />} />
-          </Route>
-          <Route path='products/' element={<Products />}>
-            <Route path='computers' element={<Computers />}></Route>
-            <Route path='electronics' element={<Electronics />}></Route>
-            <Route path='books' element={<Books />}></Route>
-          </Route>
-          <Route path="about" element={<AboutUs />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <ContextProductCount.Provider value={{ contextProductCount, setContextProductCount }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<GoHome />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </ContextProductCount.Provider>
     </>
   )
 }
 
 export default App
+
 
 
 ``` 
@@ -94,3 +88,4 @@ export default App
 ## _Author_
 - Website - [https://ferreiras.dev.br] 
 ## Acknowledgments
+- @devsuperior

@@ -1,19 +1,24 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import GoHome from './routes/GoHome';
-import React from "react";
+import { useState } from "react";
+import { ContextProductCount } from "./utils/products-context";
 
 function App() {
 
+  const [contextProductCount, setContextProductCount] = useState<number>(0);
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<GoHome />}>
+      <ContextProductCount.Provider value={{ contextProductCount, setContextProductCount }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<GoHome />}>
 
-          </Route>
+            </Route>
 
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </ContextProductCount.Provider>
     </>
   )
 }
