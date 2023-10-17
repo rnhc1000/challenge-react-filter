@@ -20,7 +20,8 @@
     font-weight: 700;
   }
 
-  .header-container-content h3 {
+  .header-container-content p {
+    display: flex;
     font-size: 12px;
     font-weight: 700;
   }

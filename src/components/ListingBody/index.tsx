@@ -1,48 +1,51 @@
-import React from 'react';
+import FilterCard from './FilterCard';
+import * as productService from '../../services/product-service';
 import './styles.css';
-
+import { useEffect, useState } from 'react';
+import { ProductDTO } from '../../dto/product';
+import ProductCard from './ProductCard';
+type Prices = {
+    minimum: number,
+    maximum: number
+}
 export default function ListingBody() {
+
+    const [products, setProducts] = useState<ProductDTO[]>([]);
+
+    const [prices, setPrices] = useState<Prices>({
+        minimum: 0,
+        maximum: Number.MAX_VALUE
+    });
+
+
+    useEffect(() => {
+
+        setProducts(productService.findByPrice(prices.minimum, prices.maximum))
+        
+    },[products]);
+
+
+    function handleSearch(minimum: number, maximum: number ) {
+
+        setPrices(prices => ({
+            ...prices,
+            minimum,
+            maximum
+        }));
+        console.log(minimum);
+        console.log(maximum);
+
+    }
     return (
-        <section>
-            <div className="container-card-filter">
+        <main className="listing-body">
+            <FilterCard onSearch={handleSearch}/>
+            {
+                // productService.findAll().map(product => <CatalogCard key={product.id} product={product} />)
+                products.map(product => <ProductCard key={product.id} product={product} />)
 
-                <div className="input-filter">
-                    <p>Preço mínimo</p>
+            }
 
-                </div>
-                <div className="input-filter">
-                    <p>Preço máximo</p>
-
-                </div>
-                <div className="filter">
-                    <p>Filtrar</p>
-
-                </div>
-
-            </div>
-            <div className="container-card-products">
-                <div className="list-card-products">
-                    <p>Pc Gamer Pro</p>
-                    <h3>R$ 1200.00</h3>
-                </div>
-                <div className="list-card-products">
-                    <p>Pc Gamer Pro</p>
-                    <h3>R$ 1200.00</h3>
-                </div>
-                <div className="list-card-products">
-                    <p>Pc Gamer Pro</p>
-                    <h3>R$ 1200.00</h3>
-                </div>
-                <div className="list-card-products">
-                    <p>Pc Gamer Pro</p>
-                    <h3>R$ 1200.00</h3>
-                </div>
-                <div className="list-card-products">
-                    <p>Pc Gamer Pro</p>
-                    <h3>R$ 1200.00</h3>
-                </div>
-            </div>
-        </section>
+        </main>
 
     );
 }
