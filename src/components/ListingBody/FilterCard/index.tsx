@@ -1,7 +1,5 @@
-import { useContext, useState } from 'react';
 import './styles.css';
-import { ContextProductCount } from '../../../utils/products-context';
-import * as productService from '../../../services/product-service';
+import { useState } from 'react';
 
 type FormData = {
     minPrice?: number,
@@ -9,7 +7,7 @@ type FormData = {
 }
 
 type Props = {
-    onSearch: Function;
+    onSearch: Funct;
 }
 
 export default function FilterCard({ onSearch }: Props) {
@@ -27,13 +25,9 @@ export default function FilterCard({ onSearch }: Props) {
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        onSearch(formData.minPrice, formData.maxPrice);
-        const count = productService.findByPrice(formData.minPrice,formData.maxPrice).length;
-        setContextProductCount(count);
-        
+        onSearch(formData.minPrice, formData.maxPrice);  
     }
 
-    const {setContextProductCount} = useContext(ContextProductCount);
 
     return (
         <section id="filter-section">
@@ -48,6 +42,7 @@ export default function FilterCard({ onSearch }: Props) {
                         placeholder="Preço Mínimo"
                         onChange={handleInputChange}
                     />
+
                     <input
                         className="input-filter"
                         name="maxPrice"
@@ -66,7 +61,3 @@ export default function FilterCard({ onSearch }: Props) {
 }
 
 
-
-// function onSearch(minPrice: number | undefined, maxPrice: number | undefined) {
-//     throw new Error('Function not implemented.');
-// }

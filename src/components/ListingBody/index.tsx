@@ -1,17 +1,20 @@
 import FilterCard from './FilterCard';
 import * as productService from '../../services/product-service';
 import './styles.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ProductDTO } from '../../dto/product';
-import ProductCard from './ProductCard';
+import { ContextProductCount } from '../../utils/products-context';
+import ListOfProducts from './ListOfProducts';
+
 type Prices = {
     minimum: number,
     maximum: number
 }
+
 export default function ListingBody() {
 
     const [products, setProducts] = useState<ProductDTO[]>([]);
-
+    const { setContextProductCount } = useContext(ContextProductCount);
     const [prices, setPrices] = useState<Prices>({
         minimum: 0,
         maximum: Number.MAX_VALUE
@@ -19,33 +22,35 @@ export default function ListingBody() {
 
 
     useEffect(() => {
+        setProducts(productService.findByPrice(prices.minimum, prices.maximum));
+        const count = productService.findByPrice(prices.minimum, prices.maximum).length;
+        setContextProductCount(count);
 
-        setProducts(productService.findByPrice(prices.minimum, prices.maximum))
-        
-    },[products]);
+    }, [prices.maximum, prices.minimum, products, setContextProductCount]);
 
-
-    function handleSearch(minimum: number, maximum: number ) {
+    function handleSearch(minimum: number, maximum: number) {
 
         setPrices(prices => ({
             ...prices,
             minimum,
             maximum
-        }));
-        console.log(minimum);
-        console.log(maximum);
+        })
+        );
 
     }
+
     return (
-        <main className="listing-body">
-            <FilterCard onSearch={handleSearch}/>
-            {
-                // productService.findAll().map(product => <CatalogCard key={product.id} product={product} />)
-                products.map(product => <ProductCard key={product.id} product={product} />)
 
-            }
-
-        </main>
+        <>
+            <section id="products-section">
+            <FilterCard onSearch={handleSearch} />
+                <div className="container-card-products">
+                        {
+                            products.map(product => <ListOfProducts key={product.id} product={product} />)
+                        }
+                    </div>
+            </section>
+        </>
 
     );
 }
