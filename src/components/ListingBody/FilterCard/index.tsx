@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import './styles.css';
-
+import { useState } from 'react';
 
 type FormData = {
     minPrice?: number,
@@ -8,7 +7,7 @@ type FormData = {
 }
 
 type Props = {
-    onSearch: Function;
+    onSearch: Funct;
 }
 
 export default function FilterCard({ onSearch }: Props) {
@@ -26,9 +25,7 @@ export default function FilterCard({ onSearch }: Props) {
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        onSearch(formData.minPrice, formData.maxPrice);
-
-        
+        onSearch(formData.minPrice, formData.maxPrice);  
     }
 
 
@@ -45,6 +42,7 @@ export default function FilterCard({ onSearch }: Props) {
                         placeholder="Preço Mínimo"
                         onChange={handleInputChange}
                     />
+
                     <input
                         className="input-filter"
                         name="maxPrice"

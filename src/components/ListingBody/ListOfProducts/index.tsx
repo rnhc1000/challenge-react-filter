@@ -11,6 +11,7 @@ export default function ListOfProducts({ product }: Props) {
             <p>{product.name}</p>
             <h3>R$ {product.price.toFixed(2)}</h3>
         </div>
+        
     );
 
 }
