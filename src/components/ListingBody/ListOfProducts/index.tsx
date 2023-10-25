@@ -6,12 +6,19 @@ type Props = {
 }
 
 export default function ListOfProducts({ product }: Props) {
+
     return (
-        <div className="list-card-products">
-            <p>{product.name}</p>
-            <h3>R$ {product.price.toFixed(2)}</h3>
-        </div>
-        
+        <>
+        {
+            Object.keys(product).length && 
+
+            <div className="list-card-products">
+                <p>{product.name}</p>
+                <h3>R$ {product.price.toFixed(2)}</h3>
+            </div>
+
+        }
+        </>
     );
 
 }
