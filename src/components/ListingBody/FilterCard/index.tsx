@@ -7,31 +7,40 @@ type FormData = {
 }
 
 type Props = {
-    onSearch: Funct;
+    onSearch: Function;
 }
 
 export default function FilterCard({ onSearch }: Props) {
 
     const [formData, setFormData] = useState<FormData>({
+
         minPrice: undefined,
         maxPrice: undefined
+
     })
 
     function handleInputChange(event: any) {
+
         const value = event.target.value;
         const name = event.target.name;
         setFormData({ ...formData, [name]: value });
+        
     }
 
     function handleSubmit(event: any) {
+
         event.preventDefault();
+        //console.log(formData);
         onSearch(formData.minPrice, formData.maxPrice);  
+
     }
 
 
     return (
+
         <section id="filter-section">
             <div className="container-card-filter">
+
                 <form onSubmit={handleSubmit} >
 
                     <input
@@ -55,9 +64,11 @@ export default function FilterCard({ onSearch }: Props) {
                     <button className="filter" type="submit">Filtrar</button>
 
                 </form>
+
             </div>
         </section>
     )
+    
 }
 
 

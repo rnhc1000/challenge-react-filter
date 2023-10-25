@@ -1,8 +1,7 @@
-
 .container-card-products {
     display: flex;
     width: 960px;
-    height: 100%vh;
+    height: 100%;
     background-color: var(--dsc-color-bg-card);
     margin: 20px 120px;
     border: 1px solid var(--dsc-color-bg-card);
@@ -10,9 +9,7 @@
     flex-direction: column;
 }
 
-
 .list-card-products {
-
     display: flex;
     flex-direction: column;
     width: 920px;
@@ -23,7 +20,6 @@
     margin-top: 20px;
     margin-bottom: 20px;
     align-items: left;
-
 }
 
 .list-card-products p {
@@ -40,8 +36,6 @@
     margin: 0 auto 5px 5px;
     
 }
-
-
 
 .listing-body {
 
